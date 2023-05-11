@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.relaxng:jing:20220510">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/relaxng/jing/20220510/jing-20220510.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/relaxng/jing/20220510/jing-20220510-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/relaxng/jing/20220510/jing-20220510-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

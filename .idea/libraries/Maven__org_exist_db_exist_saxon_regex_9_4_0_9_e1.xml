@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.exist-db:exist-saxon-regex:9.4.0-9.e1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/exist-saxon-regex/9.4.0-9.e1/exist-saxon-regex-9.4.0-9.e1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/exist-saxon-regex/9.4.0-9.e1/exist-saxon-regex-9.4.0-9.e1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/exist-saxon-regex/9.4.0-9.e1/exist-saxon-regex-9.4.0-9.e1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.exist-db.thirdparty.javax.xml.xquery:xqjri:20080114-133351">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/thirdparty/javax/xml/xquery/xqjri/20080114-133351/xqjri-20080114-133351.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/thirdparty/javax/xml/xquery/xqjri/20080114-133351/xqjri-20080114-133351-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exist-db/thirdparty/javax/xml/xquery/xqjri/20080114-133351/xqjri-20080114-133351-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

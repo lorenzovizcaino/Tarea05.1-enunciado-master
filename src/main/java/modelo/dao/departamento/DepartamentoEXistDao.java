@@ -7,6 +7,7 @@ package modelo.dao.departamento;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -264,12 +265,74 @@ public class DepartamentoEXistDao extends AbstractGenericDao<Departamento> imple
 
 	@Override
 	public boolean delete(Departamento entity) {
-		return false;
+		boolean exito=false;
+		int idDepartamento= entity.getDeptno();
+		try (Collection col = DatabaseManager.getCollection(dataSource.getUrl() + dataSource.getColeccionDepartamentos(),
+				dataSource.getUser(), dataSource.getPwd())) {
+
+			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
+			xqs.setProperty("indent", "yes");
+
+			CompiledExpression compiled = xqs.compile("update delete //DEP_ROW[DEPT_NO="+idDepartamento+"]");
+			ResourceSet result = xqs.execute(compiled);
+
+
+
+			//if(result.getSize()==0) exito=true;
+			exito=true;
+
+
+		} catch (XMLDBException e) {
+
+			e.printStackTrace();
+		}
+
+		return exito;
 	}
 
 	@Override
 	public List<Departamento> findAll() {
-		return null;
+		List <Departamento> departamentos=new ArrayList<>();
+		Departamento departamento;
+
+		try (Collection col = DatabaseManager.getCollection(dataSource.getUrl() + dataSource.getColeccionDepartamentos(),
+				dataSource.getUser(), dataSource.getPwd())) {
+
+			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
+			xqs.setProperty("indent", "yes");
+
+			CompiledExpression compiled = xqs.compile("//DEP_ROW");
+			ResourceSet result = xqs.execute(compiled);
+
+			ResourceIterator i = result.getIterator();
+			Resource res = null;
+			while (i.hasMoreResources()) {
+				try {
+					res = i.nextResource();
+
+					System.out.println(res.getContent().toString());
+
+					departamento = stringNodeToDepartamento(res.getContent().toString());
+					departamentos.add(departamento);
+
+				} finally {
+					// dont forget to cleanup resources
+					try {
+						((EXistResource) res).freeResources();
+					} catch (XMLDBException xe) {
+						departamento = null;
+						xe.printStackTrace();
+					}
+				}
+			}
+
+		} catch (XMLDBException e) {
+			departamento = null;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return departamentos;
 	}
 
 }

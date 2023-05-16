@@ -95,8 +95,9 @@ public class DepartamentoEXistDao extends AbstractGenericDao<Departamento> imple
 				XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
 				xqs.setProperty("indent", "yes");
 
-				CompiledExpression compiled = xqs
-						.compile("update insert " + deptNodeString + "into doc(\"departamentos.xml\")//departamentos");
+
+
+				CompiledExpression compiled = xqs.compile("update insert " + deptNodeString + "into doc(\"departamentos.xml\")//departamentos");
 				xqs.execute(compiled);
 
 				exito = true;
@@ -265,15 +266,13 @@ public class DepartamentoEXistDao extends AbstractGenericDao<Departamento> imple
 		try (Collection col = DatabaseManager.getCollection(dataSource.getUrl() + dataSource.getColeccionDepartamentos(),
 				dataSource.getUser(), dataSource.getPwd())) {
 
-			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");//and /LOC with '"+entity.getLoc()"'"
+			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");//and /LOC with '"+entity.getLoc()"'
 			xqs.setProperty("indent", "yes");
 
 			CompiledExpression compiled = xqs.compile("update value //DEP_ROW[DEPT_NO='"+entity.getDeptno()+"']/DNOMBRE with'"+entity.getDname()+"'");
 			ResourceSet result = xqs.execute(compiled);
-
-
-
-			//if(result.getSize()==0) exito=true;
+			CompiledExpression compiled2 = xqs.compile("update value //DEP_ROW[DEPT_NO='"+entity.getDeptno()+"']/LOC with '"+entity.getLoc()+"'");
+			ResourceSet result2 = xqs.execute(compiled2);
 			exito=true;
 
 

@@ -24,14 +24,28 @@ public class ServicioDepartamento implements IServicioDepartamento {
 
 	@Override
 	public boolean create(Departamento dept) throws DuplicateInstanceException {
-			int contador=comprobarExistencia(dept);
-			if (contador>0){
-				throw new DuplicateInstanceException("Ya existe un departamento con este id",dept.getDeptno(),Departamento.class.getName());
+//			int contador=comprobarExistencia(dept);
+//			if (contador>0){
+//				throw new DuplicateInstanceException("Ya existe un departamento con este id",dept.getDeptno(),Departamento.class.getName());
+//			}else {
+//				return departamentoDao.create(dept);
+//			}
 
+		Departamento departamento=null;
+		boolean exito=false;
+		try {
+			 departamento=departamentoDao.read(dept.getDeptno());
 
-			}else {
-				return departamentoDao.create(dept);
-			}
+		} catch (InstanceNotFoundException e) {
+			e.printStackTrace();
+		}
+		if(departamento==null){
+			exito=departamentoDao.create(dept);
+		}else{
+			exito=false;
+			throw new DuplicateInstanceException("Ya existe un departamento con este id",dept.getDeptno(),Departamento.class.getName());
+		}
+		return exito;
 
 	}
 

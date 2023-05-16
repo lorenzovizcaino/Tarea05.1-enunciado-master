@@ -260,7 +260,29 @@ public class DepartamentoEXistDao extends AbstractGenericDao<Departamento> imple
 
 	@Override
 	public boolean update(Departamento entity) {
-		return false;
+		boolean exito=false;
+		int idDepartamento= entity.getDeptno();
+		try (Collection col = DatabaseManager.getCollection(dataSource.getUrl() + dataSource.getColeccionDepartamentos(),
+				dataSource.getUser(), dataSource.getPwd())) {
+
+			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");//and /LOC with '"+entity.getLoc()"'"
+			xqs.setProperty("indent", "yes");
+
+			CompiledExpression compiled = xqs.compile("update value //DEP_ROW[DEPT_NO='"+entity.getDeptno()+"']/DNOMBRE with'"+entity.getDname()+"'");
+			ResourceSet result = xqs.execute(compiled);
+
+
+
+			//if(result.getSize()==0) exito=true;
+			exito=true;
+
+
+		} catch (XMLDBException e) {
+
+			e.printStackTrace();
+		}
+
+		return exito;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ import modelo.servicio.departamento.ServicioDepartamento;
 public class DeptWindow extends JFrame {
 
 	/**
-	 * 
+	 * hola
 	 */
 	private static final long serialVersionUID = 1L;
 
